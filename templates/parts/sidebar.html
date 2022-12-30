@@ -1,0 +1,28 @@
+<nav id="sidebar">
+               <div class="sidebar_blog_1">
+                  <div class="sidebar-header">
+                     <div class="logo_section">
+                        <a href="#"><img class="logo_icon img-responsive" src="{{ url_for('static', filename='images/logo/dolfile.png') }}" alt="#" /></a>
+                     </div>
+                  </div>
+                  <div class="sidebar_user_info">
+                     <div class="icon_setting"></div>
+                     <div class="user_profle_side">
+                        <div class="user_img"><img class="img-responsive" src="{{ url_for('static', filename='images/layout_img/dolph.png') }}" alt="#" /></div>
+                        <div class="user_info">
+                           <h6>{{ current_user.name }}</h6>
+{#                           <p><span class="online_animation"></span> Online</p>#}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="sidebar_blog_2">
+{#                  <h4>General</h4>#}
+                  <ul class="list-unstyled components">
+                     <li class="active">
+                        <a href="{{ url_for('dashboard.index') }}"><i class="fa fa-dashboard yellow_color"></i> <span>Dashboard</span></a>
+                     </li>
+                     <li><a href="{{ url_for('login.user_management') }}"><i class="fa fa-user-secret"></i> <span>User Management</span></a></li>
+                  </ul>
+               </div>
+            </nav>
