@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block css_files %}
+
+    <link rel="icon" href="../static/images/fevicon.png" type="image/png" />
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+      <!-- site css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+      <!-- responsive css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
+      <!-- color css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/color_2.css') }}" />
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
+
+{% endblock %}
+
+{% block middle_content %}
+
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2>Dashboard</h2>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row column1">
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30 yellow_bg">
+                              <div class="couter_icon">
+                                 <div>
+                                    <i class="fa fa-user"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no">{{ all_files }}</p>
+                                    <p class="head_couter">All Files</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30 blue1_bg">
+                              <div class="couter_icon">
+                                 <div>
+                                    <i class="fa fa-clock-o"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no">{{ all_files_size or 0}}</p>
+                                    <p class="head_couter">Files Size</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30 green_bg">
+                              <div class="couter_icon">
+                                 <div>
+                                    <i class="fa fa-cloud-download"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no">{{ download_requests or 0 }}</p>
+                                    <p class="head_couter">Downloads</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full counter_section margin_bottom_30 red_bg">
+                              <div class="couter_icon">
+                                 <div>
+                                    <i class="fa fa-comments-o"></i>
+                                 </div>
+                              </div>
+                              <div class="counter_no">
+                                 <div>
+                                    <p class="total_no">{{ number_of_users or 0 }}</p>
+                                    <p class="head_couter">Users</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row column1 social_media_section">
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full socile_icons fb margin_bottom_30">
+                              <div class="social_icon">
+                                 <i class="fa fa-file-image-o"></i>
+                              </div>
+                              <div class="social_cont">
+                                 <ul>
+                                    <li>
+                                       <span><strong>{{ image_count }}</strong></span>
+                                       <span>Counts</span>
+                                    </li>
+                                    <li>
+                                       <span><strong>{{ image_size }}</strong></span>
+                                       <span>Size</span>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full socile_icons tw margin_bottom_30">
+                              <div class="social_icon">
+                                 <i class="fa fa-file-video-o"></i>
+                              </div>
+                              <div class="social_cont">
+                                 <ul>
+                                    <li>
+                                       <span><strong>{{ video_count }}</strong></span>
+                                       <span>Count</span>
+                                    </li>
+                                    <li>
+                                       <span><strong>{{ video_size }}</strong></span>
+                                       <span>Size</span>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full socile_icons linked margin_bottom_30">
+                              <div class="social_icon">
+                                 <i class="fa fa-file-zip-o"></i>
+                              </div>
+                              <div class="social_cont">
+                                 <ul>
+                                    <li>
+                                       <span><strong>{{ zip_count }}</strong></span>
+                                       <span>Count</span>
+                                    </li>
+                                    <li>
+                                       <span><strong>{{ zip_size }}</strong></span>
+                                       <span>Size</span>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                           <div class="full socile_icons google_p margin_bottom_30">
+                              <div class="social_icon">
+                                 <i class="fa fa-file"></i>
+                              </div>
+                              <div class="social_cont">
+                                 <ul>
+                                    <li>
+                                       <span><strong>{{ other_count }}</strong></span>
+                                       <span>Count</span>
+                                    </li>
+                                    <li>
+                                       <span><strong>{{ other_size }}</strong></span>
+                                       <span>Size</span>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- graph -->
+                     <div class="row column2 graph margin_bottom_30">
+                        <div class="col-md-l2 col-lg-12">
+                           <div class="white_shd full">
+                              <div class="full graph_head">
+                                 <div class="heading1 margin_0">
+                                    <h2>Extra Area Chart</h2>
+                                 </div>
+                              </div>
+                              <div class="full graph_revenue">
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <div class="content">
+                                          <div class="area_chart">
+                                             <div class="row">
+                                                <div class="col-md-6">
+                                                   <canvas id="chart-2"></canvas>
+                                                </div>
+                                                <div class="col-md-6">
+                                                   <canvas id="chart-1"></canvas>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- end graph -->
+                  </div>
+                  <!-- footer -->
+{% endblock %}
+
+{% block javascripts %}
+
+     <!-- jQuery -->
+      <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+{#      <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>#}
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+      <!-- wow animation -->
+{#      <script src="{{ url_for('static', filename='js/animate.js') }}"></script>#}
+      <!-- select country -->
+{#      <script src="{{ url_for('static', filename='js/bootstrap-select.js') }}"></script>#}
+      <!-- owl carousel -->
+{#      <script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>#}
+      <!-- chart js -->
+      <script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
+{#      <script src="{{ url_for('static', filename='js/Chart.bundle.min.js') }}"></script>#}
+      <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/analyser.js') }}"></script>
+      <!-- nice scrollbar -->
+      <script src="{{ url_for('static', filename='js/perfect-scrollbar.min.js') }}"></script>
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+      <!-- custom js -->
+      <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/chart_custom_style2.js') }}"></script>
+
+{% endblock %}

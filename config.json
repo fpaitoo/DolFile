@@ -1,0 +1,8 @@
+{
+  "SECRET_KEY": "dhfskrhj9eio2312",
+  "SQLALCHEMY_DATABASE_URI": "sqlite:///FileBankDB.sqlite3",
+  "STORAGE": "Files/",
+  "CHUNK_SIZE": 1024,
+  "SWAGGER_URL": "/api/docs",
+  "API_URL": "/static/swagger.json"
+}

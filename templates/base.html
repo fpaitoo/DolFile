@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+    <title>FilesBank - {% block title %}{% endblock %}</title>
+
+
+<!-- site icon -->
+{% block css_files %} {% endblock %}
+
+</head>
+<body>
+   <div class="dashboard dashboard_2">
+   <input id="upload_months" type="hidden" value="{{ upload_months }}">
+   <input id="upload_count" type="hidden" value="{{ upload_count }}">
+   <input id="download_months" type="hidden" value="{{ download_months }}">
+   <input id="download_count" type="hidden" value="{{ download_count }}">
+      <div class="full_container">
+         <div class="inner_container">
+            <!-- Sidebar  -->
+            {% include "parts/sidebar.html" %}
+            <!-- end sidebar -->
+            <!-- right content -->
+            <div id="content">
+               <!-- topbar -->
+               {% include 'parts/navbar.html' %}
+               <!-- end topbar -->
+               <!-- dashboard inner -->
+                <div class="midde_cont">
+                {% block middle_content %}{% endblock %}
+                {% include "parts/footer.html" %}
+                </div>
+               <!-- end dashboard inner -->
+            </div>
+         </div>
+
+      </div>
+
+   {% block javascripts %}
+     {% endblock %}
+   </div>
+</body>
+</html>

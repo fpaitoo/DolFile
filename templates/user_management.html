@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block css_files %}
+
+    <link rel="icon" href="../static/images/fevicon.png" type="image/png" />
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+      <!-- site css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+      <!-- responsive css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}" />
+      <!-- color css -->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/color_2.css') }}" />
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
+
+{% endblock %}
+
+{% block middle_content %}
+
+    <div class="container-fluid">
+    <div class="row column_title">
+        <div class="col-md-12">
+           <div class="page_title">
+              <h2>User Management</h2>
+           </div>
+        </div>
+     </div>
+
+    <div class="card bg-light">
+<div class="card-body mx-auto" style="width: 50%;">
+	<h4 class="card-title mt-3 text-center">Account Management</h4>
+	<p class="text-center">Update your account details</p>
+
+
+    {% for field, errors in form.errors.items() %}
+        <div class="alert alert-danger">
+            {{ ', '.join(errors) }}
+        </div>
+    {% endfor %}
+
+    {% if 'successfully' in message %}
+        <div class="alert alert-success">
+        {{ message }}
+        </div>
+    {% elif message %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endif %}
+
+
+	<form method="post">
+        {{ form.csrf_token() }}
+           <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user-secret"></i> </span>
+		 </div>
+               {{form.username(value=current_user.username, class='form-control', placeholder=form.username.label.text, readonly='')}}
+    </div> <!-- form-group// -->
+
+	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+{{ form.name(class='form-control', placeholder=form.name.label.text, value=current_user.name) }}
+    </div> <!-- form-group// -->
+
+
+
+
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+        {{ form.current_password(class='form-control', placeholder=form.current_password.label.text) }}
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+        {{ form.new_password(class='form-control', placeholder=form.new_password.label.text) }}
+    </div> <!-- form-group// -->
+
+            <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+                {{ form.confirm_password(class='form-control', placeholder=form.confirm_password.label.text) }}
+    </div> <!-- form-group// -->
+
+    <div class="form-group">
+        {{ form.submit(class='btn btn-primary btn-block') }}
+    </div> <!-- form-group// -->
+</form>
+</div>
+</div> <!-- card.// -->
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+     <!-- jQuery -->
+      <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+      <!-- nice scrollbar -->
+      <script src="{{ url_for('static', filename='js/perfect-scrollbar.min.js') }}"></script>
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+      <!-- custom js -->
+      <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+
+{% endblock %}
+
