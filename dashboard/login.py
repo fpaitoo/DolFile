@@ -13,6 +13,7 @@ from flask_bcrypt import Bcrypt
 logins = Blueprint('login', __name__)
 
 
+@logins.get('/')
 @logins.get('/login/')
 def index():
     # print(FileDetail.query.count())

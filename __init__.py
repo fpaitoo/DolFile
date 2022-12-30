@@ -3,7 +3,7 @@ import sys
 # setting path
 sys.path.append('./')
 
-from flask import Flask, request
+from flask import Flask
 import json
 
 from flask_cors import CORS
@@ -14,10 +14,10 @@ from api.auth_view import auth
 from dashboard.login import logins
 from dashboard.dashboard import dashboard
 from extensions import db
-from models import User, FileDetail
+from models import User
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager, login_manager
-from Helpers import Aux
+from flask_login import LoginManager
+import os
 
 
 def create_app():
@@ -45,18 +45,23 @@ def create_app():
 
     with app.app_context():
         # db.drop_all()
-        # db.create_all()
-        # create_user(app)
+        db.create_all()
+        create_user(app)
         pass
     return app
 
 
 def create_user(app):
     bcrypt = Bcrypt(app)
-    password = bcrypt.generate_password_hash(password='password', rounds=10).decode('UTF-8')
-    user = User(username='admin', password=password, name='Administrator', is_active=True)
-    db.session.add(user)
-    db.session.commit()
+    user_count = User.query.count()
+    print(user_count)
+    if user_count < 1:
+        password = os.getenv('PASSWORD', 'letMePass')
+        password = bcrypt.generate_password_hash(password=password, rounds=10).decode('UTF-8')
+        username = os.getenv('USERNAME', 'admin')
+        user = User(username=username, password=password, name='Administrator', is_active=True)
+        db.session.add(user)
+        db.session.commit()
 
 
 def get_and_initialize_swagger_ui(app):
