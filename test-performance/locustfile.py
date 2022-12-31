@@ -44,7 +44,7 @@ class filebank_locust(FastHttpUser):
                 "Referer": "http://127.0.0.1:8000/login/",
                 "Sec-Fetch-Site": "same-origin",
             },
-            data="username=gpaitoo&password=mypassword",
+            data="username=admin&password=letMePass",
             catch_response=True,
         ) as resp:
             pass

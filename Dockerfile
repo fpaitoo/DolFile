@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["gunicorn"  , "-b", "0.0.0.0:8000", "wsgi:gunicorn_app"]
+CMD ["gunicorn"  , "--workers", "1", "--timeout", "120", "-b", "0.0.0.0:8000", "wsgi:gunicorn_app"]
