@@ -1,26 +1,57 @@
 # DolFile
-This application makes the job of saving files in a central location easier by sending files via api for safe keeping and also by retrieving the files via api.
-This is actively being developed and more features will be added in order to secure, improve and add more features.
-##Pre-requisite
-1. Python > 3.9
-2. Pip > 22.0
+
+DolFile makes it easy to keep files in one central location. Send files to it over an API for safe keeping and retrieve them later the same way.
+
+This project is under active development, with more features planned to improve security and usability.
+
+## Prerequisites
+
+1. Python 3.9 or later
+2. pip 22.0 or later
+
+## Security: set your own credentials
+
+DolFile reads its login from the `USERNAME` and `PASSWORD` environment variables. **Always set both to your own values before running it.** If they are not set, the app falls back to a built-in development login that is meant for local testing only. Never expose an instance running with the fallback login to a network.
+
 ## Setup
-### 1. Method One - Cloning Project
-1. Clone the project by using the clone functionalities provided by Github.
-2. With your terminal application opened, navigate to the project Directory
-3. RUN `pip3 install -r requirements.txt`
-4. You can now serve the application by running the below command. You can change the port number to your preferred port
-`gunicorn --workers 1 --timeout 120 -b 0.0.0.0:8000 wsgi:gunicorn_app`
-5. Open your browser and navigate to your servers ip or 127.0.0.1:port_number if you are running it locally
-    `http://127.0.0.1:8000` - assuming am running it locally 
-6. By default, username = 'admin' and password = 'letMePass'
 
-### 2. Method Two - Docker
-1. Run `docker pull gpaitoo/dolfile` to get the image locally
-2. to start serving the application run `docker run --name dolfile -p 8000:8000 -e USERNAME=gpaitoo -e PASSWORD=mypassword gpaitoo/dolfile`
-3. You can set your username and password by using the environment variables. Once set, do not use it in your subsequent commands
-4. Open your browser and navigate to your servers ip or 127.0.0.1:port_number if you are running it locally
-    `http://127.0.0.1:8000` - assuming am running it locally 
-5. By default, username = 'admin' and password = 'letMePass' unless set via environment variables 
+### Option 1: Run from source
 
-##Usage
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/fpaitoo/DolFile.git
+   cd DolFile
+   ```
+2. Install the dependencies:
+   ```bash
+   pip3 install -r requirements.txt
+   ```
+3. Set your credentials:
+   ```bash
+   export USERNAME='your-username'
+   export PASSWORD='a-strong-password'
+   ```
+4. Start the server (change the port if you prefer):
+   ```bash
+   gunicorn --workers 1 --timeout 120 -b 0.0.0.0:8000 wsgi:gunicorn_app
+   ```
+5. Open `http://127.0.0.1:8000` in your browser (or your server's IP and port) and sign in with the credentials you set.
+
+### Option 2: Docker
+
+1. Pull the image:
+   ```bash
+   docker pull gpaitoo/dolfile
+   ```
+2. Run it with your own credentials:
+   ```bash
+   docker run --name dolfile -p 8000:8000 \
+     -e USERNAME='your-username' \
+     -e PASSWORD='a-strong-password' \
+     gpaitoo/dolfile
+   ```
+3. Open `http://127.0.0.1:8000` (or your server's IP and port) and sign in with the credentials you set.
+
+## License
+
+Released under the [MIT License](LICENSE).
