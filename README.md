@@ -11,7 +11,12 @@ This project is under active development, with more features planned to improve 
 
 ## Security: set your own credentials
 
-DolFile reads its login from the `USERNAME` and `PASSWORD` environment variables. **Always set both to your own values before running it.** If they are not set, the app falls back to a built-in development login that is meant for local testing only. Never expose an instance running with the fallback login to a network.
+DolFile creates its first admin user on startup from environment variables, and **it will not start until you provide them**. There is no built-in default login.
+
+- Running from source: set `DOLFILE_USERNAME` and `DOLFILE_PASSWORD`.
+- Running with Docker: set `USERNAME` and `PASSWORD` with `-e`, as shown below. (`DOLFILE_USERNAME` and `DOLFILE_PASSWORD` work too.)
+
+Choose a strong password. The credentials are only used the first time, when the database has no users yet.
 
 ## Setup
 
@@ -28,8 +33,8 @@ DolFile reads its login from the `USERNAME` and `PASSWORD` environment variables
    ```
 3. Set your credentials:
    ```bash
-   export USERNAME='your-username'
-   export PASSWORD='a-strong-password'
+   export DOLFILE_USERNAME='your-username'
+   export DOLFILE_PASSWORD='a-strong-password'
    ```
 4. Start the server (change the port if you prefer):
    ```bash

@@ -56,9 +56,15 @@ def create_user(app):
     user_count = User.query.count()
     print(user_count)
     if user_count < 1:
-        password = os.getenv('PASSWORD', 'letMePass')
+        # DOLFILE_* names are preferred; USERNAME/PASSWORD are still accepted for existing Docker setups.
+        username = os.getenv('DOLFILE_USERNAME') or os.getenv('USERNAME')
+        password = os.getenv('DOLFILE_PASSWORD') or os.getenv('PASSWORD')
+        if not username or not password:
+            raise RuntimeError(
+                "DolFile has no users yet and needs an admin account. "
+                "Set the DOLFILE_USERNAME and DOLFILE_PASSWORD environment variables to your own values and start the app again."
+            )
         password = bcrypt.generate_password_hash(password=password, rounds=10).decode('UTF-8')
-        username = os.getenv('USERNAME', 'admin')
         user = User(username=username, password=password, name='Administrator', is_active=True)
         db.session.add(user)
         db.session.commit()
